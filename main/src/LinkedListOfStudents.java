@@ -3,13 +3,11 @@ public class LinkedListOfStudents {
     private Student headOfStudents;
     private int size = 0;
 
-//    public LinkedListOfStudents(LinkedListOfStudents linkedListOfStudents) {
-//        //copy from another linkedlist
-//    }
 
     public void push(Student s) {
         if (size == 0) {
             headOfStudents = s;
+            size++;
             return;
         }
         s.setNextStudent(headOfStudents);
@@ -24,6 +22,7 @@ public class LinkedListOfStudents {
 
         if (size == 1) {
             headOfStudents = null;
+            size--;
             return tempStudent;
         }
         if (size == 0) {
@@ -35,9 +34,10 @@ public class LinkedListOfStudents {
         return tempStudent;
     }
 
-    public boolean addLast(Student s) {
+     public boolean addLast(Student s) {
         if (size == 0) {
             headOfStudents = s;
+            size++;
             return true;
         }
         currentStudent = headOfStudents;
@@ -51,8 +51,18 @@ public class LinkedListOfStudents {
     }
 
     public Student removeLast() {
-        currentStudent = headOfStudents;
         Student tempStudent = null;
+
+        if (size == 1) {
+            tempStudent = headOfStudents;
+            headOfStudents = null;
+            size--;
+            return tempStudent;
+        }
+        if (size == 0) {
+            return null;
+        }
+        currentStudent = headOfStudents;
         while (currentStudent.getNextStudent() != null) {
             currentStudent = currentStudent.getNextStudent();
         }
@@ -63,6 +73,10 @@ public class LinkedListOfStudents {
         return tempStudent;
     }
 
+    public int size() {
+        return size;
+    }
+
     @Override
     public String toString() {
         currentStudent = headOfStudents;
@@ -71,7 +85,7 @@ public class LinkedListOfStudents {
 
         while (currentStudent != null) {
             output.append(currentStudent.getLastName()).append(" ").append(currentStudent.getFirstName())
-                    .append(" ").append(currentStudent.getAge()).append("\n");
+                                                       .append(" ").append(currentStudent.getAge()).append("\n");
             currentStudent =  currentStudent.getNextStudent();
         }
         currentStudent = headOfStudents;

@@ -1,4 +1,3 @@
-
 public class Student implements Comparable<Student> {
     private String firstName;
     private String lastName;
