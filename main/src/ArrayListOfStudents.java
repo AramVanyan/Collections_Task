@@ -22,7 +22,7 @@ public class ArrayListOfStudents {
     }
 
 
-    boolean add(Student s) {
+    public boolean add(Student s) {
         checkForAvailableCapacity();
         students[++indexOfTop] = s;
         return true;
@@ -41,7 +41,7 @@ public class ArrayListOfStudents {
     }
 
 
-    boolean remove(Student s) {
+    public boolean remove(Student s) {
         int indexOfFirstOccurrence = -1;
         Student[] tempStudents = new Student[initialCapacity];
         int sizeOfTempArray = -1;
@@ -71,13 +71,12 @@ public class ArrayListOfStudents {
                 tempStudents[++sizeOfTempArray] = students[i];
             }
         }
-
         students = tempStudents;
         indexOfTop--;
         return true;
     }
 
-    int size() {
+    public int size() {
         return indexOfTop + 1;
     }
 
