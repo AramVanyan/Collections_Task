@@ -2,11 +2,15 @@ package custom_implementations;
 import main.Student;
 
 public class ArrayListOfStudents {
+    private static final int DEFAULT_CAPACITY = 10;
     private int initialCapacity;
     private int indexOfTop = -1;
     private Student[] students;
 
     public ArrayListOfStudents(int initialCapacityOfArray) {
+        if (initialCapacityOfArray <= 0) {
+            throw new IllegalArgumentException();
+        }
         initialCapacity = initialCapacityOfArray;
         students = new Student[initialCapacity];
     }
@@ -20,8 +24,8 @@ public class ArrayListOfStudents {
     }
 
     public ArrayListOfStudents() {
-        initialCapacity = 10;
-        students = new Student[initialCapacity];
+        students = new Student[DEFAULT_CAPACITY];
+        initialCapacity = DEFAULT_CAPACITY;
     }
 
 

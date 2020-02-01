@@ -2,7 +2,7 @@ package custom_implementations;
 import main.Student;
 
 public class LinkedListOfStudents {
-    private Student currentStudent;
+    private Student tailStudent;
     private Student headOfStudents;
     private int size = 0;
 
@@ -13,6 +13,7 @@ public class LinkedListOfStudents {
         }
         if (size == 0) {
             headOfStudents = s;
+            tailStudent = headOfStudents;
             size++;
             return;
         }
@@ -28,6 +29,7 @@ public class LinkedListOfStudents {
 
         if (size == 1) {
             headOfStudents = null;
+            tailStudent = null;
             size--;
             return tempStudent;
         }
@@ -46,15 +48,13 @@ public class LinkedListOfStudents {
         }
         if (size == 0) {
             headOfStudents = s;
+            tailStudent = headOfStudents;
             size++;
             return true;
         }
-        currentStudent = headOfStudents;
-        while (currentStudent.getNextStudent() != null) {
-            currentStudent = currentStudent.getNextStudent();
-        }
-        currentStudent.setNextStudent(s);
-        currentStudent.getNextStudent().setPreviousStudent(currentStudent);
+        tailStudent.setNextStudent(s);
+        tailStudent.getNextStudent().setPreviousStudent(tailStudent);
+        tailStudent = s;
         size++;
         return true;
     }
@@ -71,13 +71,11 @@ public class LinkedListOfStudents {
         if (size == 0) {
             return null;
         }
-        currentStudent = headOfStudents;
-        while (currentStudent.getNextStudent() != null) {
-            currentStudent = currentStudent.getNextStudent();
-        }
-        tempStudent = currentStudent;
-        currentStudent.getPreviousStudent().setNextStudent(null);
-        currentStudent.setPreviousStudent(null);
+        tempStudent = tailStudent;
+        Student previousStudent = tailStudent.getPreviousStudent();
+        tailStudent.getPreviousStudent().setNextStudent(null);
+        tailStudent.setPreviousStudent(null);
+        tailStudent = previousStudent;
         size--;
         return tempStudent;
     }
@@ -88,7 +86,7 @@ public class LinkedListOfStudents {
 
     @Override
     public String toString() {
-        currentStudent = headOfStudents;
+        Student currentStudent = headOfStudents;
         StringBuilder output = new StringBuilder();
 
         while (currentStudent != null) {
@@ -96,7 +94,6 @@ public class LinkedListOfStudents {
                                                        .append(" ").append(currentStudent.getAge()).append("\n");
             currentStudent =  currentStudent.getNextStudent();
         }
-        currentStudent = headOfStudents;
         return output.toString();
     }
 }

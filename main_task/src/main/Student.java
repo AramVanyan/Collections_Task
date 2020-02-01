@@ -58,16 +58,13 @@ public class Student implements Comparable<Student> {
         if (s == this) {
             return true;
         }
-        if (this.firstName != tempStudent.firstName) {
+        if (!this.firstName.equals(tempStudent.firstName)) {
             return false;
         }
-        if (this.lastName != tempStudent.lastName) {
+        if (!this.lastName.equals(tempStudent.lastName)) {
             return false;
         }
-        if (this.age != tempStudent.age) {
-            return false;
-        }
-        return true;
+        return this.age == tempStudent.age;
     }
 
 
